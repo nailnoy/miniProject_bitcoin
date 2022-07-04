@@ -1,87 +1,97 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="./css/App.css">
+	<link rel="stylesheet" type="text/css" href="./css/index.css">
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
+
 <body>
 
-	 <div class="App">
-				<section class="coin-tracker">
-					<div class="title flex-grid flex-grid--center">
-						<h1>암호화폐 실시간 TOP 5</h1>
-						<div class="btn">
-							<button >새로고침</button>
-						</div>
-					</div>
-					<div id="result">
-						<div class="coin-table">
-							<table>
-								<thead>
-									<tr>
-										<th class="headCol rankCol">순위</th>
-										<th class="headCol nameCol">종목</th>
-										<th>기호</th>
-										<th>가격(KRW)</th>
-										<th>총 시가</th>
-										<th>거래량(24H)</th>
-										<th>변동(24H)</th>
-										<th>업로드 시간</th>
-									</tr>
-								</thead>
-								<tbody id="tables">
-								</tbody>
-							</table>
-						</div>		
-					</div>
-				</section>
+	<div class="App">
+		<section class="coin-tracker">
+			<div class="title flex-grid flex-grid--center">
+				<h1>암호화폐 실시간 TOP 100</h1>
+				<div class="btn">
+					<button onclick="updateTable()">새로고침</button>
+				</div>
 			</div>
-			
+			<div class="result">
+				<div class="coin-table">
+					<table>
+						<thead>
+							<tr>
+								<th class="headCol rankCol">순위</th>
+								<th class="headCol nameCol">종목</th>
+								<th>기호</th>
+								<th>가격(KRW)</th>
+								<th>총 시가</th>
+								<th>거래량(24H)</th>
+								<th>변동(24H)</th>
+								<th>업로드 시간</th>
+							</tr>
+						</thead>
+						<tbody id="table">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
+
 	<script type="text/javascript">
 		let datas;
-		
-		axios.get(
-		        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=krw&order=market_cap_desc&per_page=100&page=1&sparkline=false"
-		      )
-		      .then(function (response) {
-				    console.log(response.data.sort(function(a, b)  {
-				    	  return b.current_price - a.current_price;
-				    }));
- 				    response.data.forEach((coin, i) => datas += 
-							`<tr id='${coin.id}'>
-								<td class="headCol rankCol align-right">
-									${i+1}
+		updateTable();
+
+		let interval = setInterval(updateTable, 60000);
+
+		function updateTable() {
+			axios.get(
+				"https://api.coingecko.com/api/v3/coins/markets?vs_currency=krw&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+			)
+				.then(function (response) {
+					console.log(response.data);
+					response.data.sort(function (a, b) {
+						return b.current_price - a.current_price;
+					}).forEach((coin, i) => datas +=
+						`<tr id='${coin.id}'>
+								<td class="headCol rankCol align-center">
+									${i + 1}
 								</td>
 								<td class="headCol nameCol">
 									${coin.name}
 								</td>
 								<td>
-									${coin.image}
+									<img src="${coin.image}">
 								</td>
-								<td class="align-right">
+								<td class="align-center">
 									${coin.current_price}
 								</td>
-								<td class="align-right">
+								<td class="align-center">
 									${coin.market_cap}
 								</td>
-								<td class="align-right">
+								<td class="align-center">
 									${coin.total_volume}
 								</td>
-								<td class="align-right">
+								<td class="align-center">
 									${coin.price_change_percentage_24h}
 								</td>
-								<td class="align-right">
-									${coin.last_updated}
+								<td class="align-center">
+									${new Date(coin.last_updated).toLocaleString()}
+									
 								</td>
-				</tr>`)
-				    document.getElementById("tables").innerHTML = datas;
-				    
-				  })
-				  .catch(function (error) {
-				    console.log(error);
-				  });
+							</tr>`)
+					document.getElementById("table").innerHTML = datas;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		}
 	</script>
-			
+
 </body>
+
 </html>
