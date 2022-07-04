@@ -23,17 +23,21 @@ body {
 
 .coin-tracker {
 	padding: 3.5rem 0.75rem;
+
 	h1 {
 		font-weight: 700;
 		font-size: 1.25rem;
 		color: #fff;
 		text-align: center;
 	}
+
 	.title {
 		position: relative;
 	}
+
 	.btn {
 		margin-left: 1rem;
+
 		button {
 			display: inline-block;
 			width: 40px;
@@ -44,28 +48,33 @@ body {
 			text-indent: -9999px;
 			border: 1px solid #fff;
 			border-radius: 3px;
-			background: rgba(255, 255, 255, 0.3) center center url('../images/refresh.png') no-repeat;
+			background: rgb(22, 224, 96) center center url('../images/refresh.png') no-repeat;
 			background-size: 20px auto;
 			transition: all ease-in 0.1s;
+
 			&:hover {
 				background-color: rgba(255, 255, 255, 0.5)
 			}
 		}
 	}
+
 	.result {
 		position: relative;
 		height: 57vh;
 		overflow-y: scroll;
 		margin: 2rem auto 0;
 		border: 3px solid #666;
+
 		.coin-table {
 			padding-left: 155px;
 			overflow-x: scroll;
 		}
+
 		table {
 			margin: auto;
 			font-size: 0.875rem;
 			table-layout: fixed;
+
 			th {
 				width: 110px;
 				padding: 0.5rem;
@@ -74,29 +83,34 @@ body {
 				color: rgb(15, 184, 141);
 				background-color: #333;
 				border-bottom: 1px solid #666;
-				white-space : nowrap;
-				text-overflow : ellipsis;
-				overflow : hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
 			}
+
 			td {
 				width: 110px;
 				padding: 0.5rem;
 				color: #eee;
 				background-color: #333;
-				white-space : nowrap;
-				text-overflow : ellipsis;
-				overflow : hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
 			}
+
 			.headCol {
 				position: absolute;
+
 				&th {
 					z-index: 1;
 				}
 			}
+
 			.rankCol {
 				left: 0;
 				width: 45px;
 			}
+
 			.nameCol {
 				left: 45px;
 				width: 110px;
@@ -104,12 +118,139 @@ body {
 			}
 		}
 	}
+
 	.loader {
 		display: block;
 		font-size: 0.875rem;
 		line-height: 1.4;
 		text-align: center;
 		color: #eee;
+	}
+}
+#loginbtn {
+	float: right;
+	width: 80px;
+	height: 40px;
+	border: 1px solid #fff;
+
+}
+
+input[type=text],
+input[type=password] {
+	width: 100%;
+	padding: 15px;
+	margin: 5px 0 22px 0;
+	display: inline-block;
+	border: none;
+	background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus,
+input[type=password]:focus {
+	background-color: #ddd;
+	outline: none;
+}
+
+/* Set a style for all buttons */
+.submit {
+	background-color: #04AA6D;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 0.9;
+}
+
+.submit:hover {
+	opacity: 1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+	padding: 14px 20px;
+	background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn,
+.signinbtn {
+	float: left;
+	width: 50%;
+}
+
+/* Add padding to container elements */
+.login-form {
+	padding: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%;
+	/* Full width */
+	height: 100%;
+	/* Full height */
+	overflow: auto;
+	/* Enable scroll if needed */
+	background-color: #595a5c;
+	padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.content {
+	background-color: #fefefe;
+	margin: 5% auto 15% auto;
+	/* 5% from the top, 15% from the bottom and centered */
+	border: 1px solid #888;
+	width: 80%;
+	/* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+	border: 1px solid #f1f1f1;
+	margin-bottom: 25px;
+}
+
+/* The Close Button (x) */
+.close {
+	position: absolute;
+	right: 35px;
+	top: 15px;
+	font-size: 40px;
+	font-weight: bold;
+	color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+	color: #f44336;
+	cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+
+	.cancelbtn,
+	.signupbtn {
+		width: 100%;
 	}
 }
 
@@ -119,17 +260,21 @@ body {
 		h1 {
 			font-size: 2rem;
 		}
+
 		.btn {
 			padding-top: 6px;
 		}
+
 		.result {
 			width: 850px;
 			height: auto;
 			overflow-y: hidden;
+
 			.coin-table {
 				padding-left: 0;
 				overflow-x: auto;
 			}
+
 			table {
 				th {
 					width: 110px;
@@ -137,19 +282,21 @@ body {
 					font-weight: 700;
 					color: rgb(15, 184, 141);
 					background-color: #333;
-					white-space : nowrap;
-					text-overflow : ellipsis;
-					overflow : hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
 				}
+
 				td {
 					width: 110px;
 					padding: 0.5rem;
 					color: #eee;
 					background-color: #333;
-					white-space : nowrap;
-					text-overflow : ellipsis;
-					overflow : hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
 				}
+
 				.headCol {
 					position: static;
 				}

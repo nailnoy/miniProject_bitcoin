@@ -12,6 +12,23 @@
 <body>
 
 	<div class="App">
+
+		<button id="loginbtn" onclick="document.getElementById('login-container').style.display='block'">로그인</button>
+				<div id="login-container" class="modal">
+					<span onclick="document.getElementById('login-container').style.display='none'" class="close" title="Close Modal">&times;</span>
+					<form class="content" action="login" method="post">
+						<div class="login-form">
+							<input type="hidden" name="command" value="login">
+							<label for="Id"><b>Id</b></label>
+							<input type="text" placeholder="Enter Id" name="id" required>
+							
+							<label for="psw"><b>Password</b></label>
+							<input type="password" placeholder="Enter Password" name="psw" required>
+									
+							<button class="submit" type="submit">Login</button>
+						</div>
+					</form>
+			</div>
 		<section class="coin-tracker">
 			<div class="title flex-grid flex-grid--center">
 				<h1>암호화폐 실시간 TOP 100</h1>
@@ -44,6 +61,13 @@
 
 	<script type="text/javascript">
 		let datas;
+		var modal = document.getElementById('login-container');
+	
+		window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+		}
 		updateTable();
 
 		let interval = setInterval(updateTable, 60000);
