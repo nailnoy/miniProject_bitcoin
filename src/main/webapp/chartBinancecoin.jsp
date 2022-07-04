@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="./css/index.scss">
 	<link rel="stylesheet" type="text/css" href="./css/App.css">
-	<title>chartBitcoin</title>
+	<title>chartBinancecoin</title>
 	
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -19,13 +19,14 @@
 	
 		      var data = new google.visualization.DataTable();
 		      data.addColumn('string', '날짜');
-		      data.addColumn('number', 'Bitcoin(KRW)');
+		      data.addColumn('number', 'Binancecoin(KRW)');
 	
 		      data.addRows(coinData);
 	
 		      var options = {
 		        hAxis: {
 		          title: '날짜',
+				  
 		        },
 	
 		        vAxis: {
@@ -48,7 +49,7 @@
 	<script type="text/javascript">
 	    let coinData;
 	        
-        axios.get('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=krw&days=7&interval=daily'
+        axios.get('https://api.coingecko.com/api/v3/coins/binancecoin/market_chart?vs_currency=krw&days=7&interval=daily'
         ).then(function (reqdata){
           console.log(reqdata.data);
           coinData = reqdata.data.prices;
