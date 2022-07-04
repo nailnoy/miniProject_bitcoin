@@ -24,6 +24,8 @@ public class BitcoinController extends HttpServlet {
 		try{
 			if(command.equals("login")){
 				login(request, response);
+			}else if(command.equals("chart")) {
+				chart(request, response);
 			}
 		}catch(Exception s){
 			request.setAttribute("errorMsg", s.getMessage());
@@ -35,7 +37,6 @@ public class BitcoinController extends HttpServlet {
 	protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out = response.getWriter();
 			
 			String email = request.getParameter("email");
 			String psw = request.getParameter("psw");
@@ -50,4 +51,14 @@ public class BitcoinController extends HttpServlet {
 				response.sendRedirect("fail-login");
 				}
 		}
+	
+	protected void chart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("text/html;charset=utf-8");
+		
+		String email = request.getParameter("email");
+		String psw = request.getParameter("psw");
+		
+		
+	}
 }

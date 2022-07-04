@@ -69,7 +69,7 @@
 					response.data.sort(function (a, b) {
 						return b.current_price - a.current_price;
 					}).forEach((coin, i) => datas +=
-						`<tr id='${coin.id}'>
+						`<tr id='${coin.id}' onclick="location.href='chartBitcoin.jsp?id=${coin.id}';">
 								<td class="headCol rankCol align-center">
 									${i + 1}
 								</td>

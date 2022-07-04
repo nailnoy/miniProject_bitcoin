@@ -25,7 +25,7 @@ public class Bookmark {
 	@Column(name="bookmarkId")
 	private int bookmarkId;
 	
-	private String CoinId;
+	private String coinId;
 	
 	@ManyToOne(targetEntity = Member.class)
 	@JoinColumn(name="memberId")

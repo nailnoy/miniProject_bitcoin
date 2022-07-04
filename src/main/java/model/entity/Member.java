@@ -31,6 +31,9 @@ public class Member {
 
 	private String password;
 
+	@OneToMany(mappedBy = "memberId")
+	private List<Bookmark> bookmarks;
+
 
 
 }
