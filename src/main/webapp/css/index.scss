@@ -47,11 +47,59 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-a {
-	&:visited {
-		color: #999c9f;
-	}
-}
+header {
+	display: flex;
+	align-items: center;
+	background: #04AA6D;
+	padding: 20px;
+  }
+  
+  nav {
+	margin-left: auto;
+  }
+  
+  h1 {
+	display: inline-block;
+	vertical-align: middle;
+	color: white;
+	margin: 0.5rem;
+	padding: 0;
+  }
+  
+  nav {
+	display: inline-block;
+	vertical-align: middle;
+  }
+  
+  ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+  }
+  
+  li.icon {
+	flex-basis: 25%;
+  }
+  
+  a {
+	display: block;
+	text-align: center;
+	margin: .25rem;
+	padding: .5rem 1rem;
+	text-decoration: none;
+	font-weight: bold;
+	color: white;
+	background: rgb(7, 151, 69);
+  }
+  
+  a:hover {
+	background: yellowgreen;
+  }
+  
+  *, *:before, *:after {
+	box-sizing: inherit;
+  }
 img {
 	display: block;
 	width: 80%;
