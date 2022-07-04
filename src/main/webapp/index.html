@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="./css/App.css">
+	<link rel="stylesheet" type="text/css" href="./css/index.css">
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+<p></p>
+	<div class="App">
+
+
+   
+
+		<header>
+			<nav>
+			  <ul>
+				<li><a href="#">마이 프로필</a></li>
+				<li><a href="loginform.html">로그인</a></li>
+				<li><a href="signup2.html">회원가입</a></li>
+				<li><a id="text2" href="#" >오늘의 날씨는</a></li>
+				<li><a href="#" style="background: #60e548;" onclick="parseText()"> (click!) 오늘의 한강 수온 확인하기 :</a></li>
+				<li><a id="text" href="#" style=" border: solid black;">수온</a></li>
+				
+				
+			  </ul>
+			</nav>
+		  </header>
+				
+		<section class="coin-tracker">
+			<div class="title flex-grid flex-grid--center">
+				<h1>암호화폐 실시간 TOP 100</h1>
+				<div class="btn">
+					<button onclick="updateTable()">새로고침</button>
+				</div>
+			</div>
+			<div class="result">
+				<div class="coin-table">
+					<table>
+						<thead>
+							<tr>
+								<th class="headCol rankCol">순위</th>
+								<th class="headCol nameCol">종목</th>
+								<th>기호</th>
+								<th>가격(KRW)</th>
+								<th>총 시가</th>
+								<th>거래량(24H)</th>
+								<th>변동(24H)</th>
+								<th>업로드 시간</th>
+							</tr>
+						</thead>
+						<tbody id="table">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<script type="text/javascript">
+		let datas;
+		
+		updateTable();
+
+		let interval = setInterval(updateTable, 60000);
+
+		function updateTable() {
+			axios.get(
+				"https://api.coingecko.com/api/v3/coins/markets?vs_currency=krw&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+			)
+				.then(function (response) {
+					console.log(response.data);
+					response.data.sort(function (a, b) {
+						return b.current_price - a.current_price;
+					}).forEach((coin, i) => datas +=
+						`<tr id='${coin.id}'>
+								<td class="headCol rankCol align-center">
+									${i + 1}
+								</td>
+								<td class="headCol nameCol">
+									${coin.name}
+								</td>
+								<td>
+									<img src="${coin.image}">
+								</td>
+								<td class="align-center">
+									${coin.current_price}
+								</td>
+								<td class="align-center">
+									${coin.market_cap}
+								</td>
+								<td class="align-center">
+									${coin.total_volume}
+								</td>
+								<td class="align-center">
+									${coin.price_change_percentage_24h}
+								</td>
+								<td class="align-center">
+									${new Date(coin.last_updated).toLocaleString()}
+									
+								</td>
+							</tr>`)
+					document.getElementById("table").innerHTML = datas;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		}
+		
+		function hanriver(){
+			
+			axios.get(
+					"http://openapi.seoul.go.kr:8088/666d64506c7965613130354f736d664c/xml/WPOSInformationTime/1/5/"
+				)
+					.then(function (response) {
+						console.log(response.data);});
+		}
+		function parseText() {
+			axios.get(
+					"http://openapi.seoul.go.kr:8088/666d64506c7965613130354f736d664c/xml/WPOSInformationTime/1/5/"
+				)
+					.then(function (response) {
+						console.log(response.data);
+            var xmlText, xmlParser, xmlDoc;
+            xmlText = response.data
+            xmlParser = new DOMParser();
+            xmlDoc = xmlParser.parseFromString(xmlText, "text/xml");
+            console.log(xmlDoc);
+            document.getElementById("text").innerHTML =
+                xmlDoc.getElementsByTagName("W_TEMP")[4].childNodes[0].nodeValue + "도";
+                if(xmlDoc.getElementsByTagName("W_TEMP")[4].childNodes[0].nodeValue<18)
+                	{document.getElementById("text2").innerText ="자살상담은 1588-9191";
+                	document.getElementById("text2").style=" background:red;"}
+                else{document.getElementById("text2").innerText ="날씨가 참 좋아요!";}
+                
+					}); }
+
+		
+			
+	</script>
+
+</body>
+
+</html>

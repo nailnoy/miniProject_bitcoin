@@ -1,0 +1,164 @@
+body {
+  background-color: #333;
+}
+
+.flex-grid {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.flex-grid--center {
+  -webkit-box-pack: center;
+  -moz-box-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.coin-tracker {
+  padding: 3.5rem 0.75rem;
+}
+.coin-tracker h1 {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #fff;
+  text-align: center;
+}
+.coin-tracker .title {
+  position: relative;
+}
+.coin-tracker .btn {
+  margin-left: 1rem;
+}
+.coin-tracker .btn button {
+  display: inline-block;
+  width: 40px;
+  height: 25px;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+  color: #fff;
+  text-indent: -9999px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  background: rgb(22, 224, 96) center center url("../images/refresh.png") no-repeat;
+  background-size: 20px auto;
+  transition: all ease-in 0.1s;
+}
+.coin-tracker .btn button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.coin-tracker .result {
+  position: relative;
+  height: 57vh;
+  overflow-y: scroll;
+  margin: 2rem auto 0;
+  border: 3px solid #666;
+}
+.coin-tracker .result .coin-table {
+  padding-left: 155px;
+  overflow-x: scroll;
+}
+.coin-tracker .result table {
+  margin: auto;
+  font-size: 0.875rem;
+  table-layout: fixed;
+}
+.coin-tracker .result table th {
+  width: 110px;
+  padding: 0.5rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: rgb(15, 184, 141);
+  background-color: #333;
+  border-bottom: 1px solid #666;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.coin-tracker .result table td {
+  width: 110px;
+  padding: 0.5rem;
+  color: #eee;
+  background-color: #333;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.coin-tracker .result table .headCol {
+  position: absolute;
+}
+.coin-tracker .result table .headColth {
+  z-index: 1;
+}
+.coin-tracker .result table .rankCol {
+  left: 0;
+  width: 45px;
+}
+.coin-tracker .result table .nameCol {
+  left: 45px;
+  width: 110px;
+  border-right: 3px solid #666;
+}
+.coin-tracker .loader {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  text-align: center;
+  color: #eee;
+}
+
+#loginbtn {
+  float: right;
+  width: 80px;
+  height: 40px;
+  border: 1px solid #fff;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .coin-tracker h1 {
+    font-size: 2rem;
+  }
+  .coin-tracker .btn {
+    padding-top: 6px;
+  }
+  .coin-tracker .result {
+    width: 850px;
+    height: auto;
+    overflow-y: hidden;
+  }
+  .coin-tracker .result .coin-table {
+    padding-left: 0;
+    overflow-x: auto;
+  }
+  .coin-tracker .result table th {
+    width: 110px;
+    padding: 0.5rem;
+    font-weight: 700;
+    color: rgb(15, 184, 141);
+    background-color: #333;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .coin-tracker .result table td {
+    width: 110px;
+    padding: 0.5rem;
+    color: #eee;
+    background-color: #333;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .coin-tracker .result table .headCol {
+    position: static;
+  }
+}
+
+/*# sourceMappingURL=App.css.map */
