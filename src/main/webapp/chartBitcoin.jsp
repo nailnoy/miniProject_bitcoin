@@ -19,7 +19,7 @@
 	
 		      var data = new google.visualization.DataTable();
 		      data.addColumn('string', '날짜');
-		      data.addColumn('number', 'Bitcoin(KRW)');
+		      data.addColumn('number', '${param.id}(KRW)');
 	
 		      data.addRows(coinData);
 	
@@ -48,7 +48,7 @@
 	<script type="text/javascript">
 	    let coinData;
 	        
-        axios.get('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=krw&days=7&interval=daily'
+        axios.get(`https://api.coingecko.com/api/v3/coins/${param.id}/market_chart?vs_currency=krw&days=7&interval=daily`
         ).then(function (reqdata){
           console.log(reqdata.data);
           coinData = reqdata.data.prices;
