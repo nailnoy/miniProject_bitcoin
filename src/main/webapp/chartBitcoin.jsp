@@ -12,6 +12,8 @@
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
+	function getChart(){
+		
 		google.charts.load('current', {packages: ['corechart', 'line']});
 		google.charts.setOnLoadCallback(drawBasic);
 	
@@ -37,13 +39,18 @@
 		      
 		      chart.draw(data, options);
 		}
+	}
     </script>
 	
 </head>
 <body>
     <div id="chart_div" style="width: 1200px; height: 500px;"></div>
     
-	<button onclick="location.href='index.html'">처음으로 돌아가기</button>
+    <button style=" border: 1px solid skyblue;
+            background-color: rgba(0,0,0,0);
+            color: skyblue;
+            padding: 5px;
+            text-align:center; padding:auto;"onclick="location.href='index.html'">처음으로 돌아가기</button>
 	
 	<script type="text/javascript">
 	    let coinData;
@@ -58,6 +65,8 @@
 	    	  coinData[idx][0] = Unix_timestamp(coinData[idx][0]);
 	    	  idx++;
 	      }
+	      
+	      getChart();
     
         }).catch(function(errdata){
           console.log('발생된 문제', errdata);
