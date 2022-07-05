@@ -17,8 +17,11 @@
 			<nav>
 			  <ul>
 				<li><a href="#">마이 프로필</a></li>
-				<li><a href="loginform.html">로그인</a></li>
-				<li><a href="#">회원가입</a></li>
+				<li><a href="login.html">로그인</a></li>
+				<li><a href="signup.html">회원가입</a></li>
+				<li><a id="text" >오늘의 날씨는</a></li>
+				<li><a style="background: #60e548;" onclick="parseText()"> (click!) 오늘의 한강 수온 확인하기 :</a></li>
+				<li><a id="w_temp" style=" border: solid black;">수온</a></li>
 			  </ul>
 			</nav>
 		  </header>
@@ -102,6 +105,35 @@
 					console.log(error);
 				});
 		}
+
+		function hanriver(){
+			
+			axios.get(
+					"http://openapi.seoul.go.kr:8088/666d64506c7965613130354f736d664c/xml/WPOSInformationTime/1/5/"
+				)
+					.then(function (response) {
+						console.log(response.data);});
+		}
+		function parseText() {
+			axios.get(
+					"http://openapi.seoul.go.kr:8088/666d64506c7965613130354f736d664c/xml/WPOSInformationTime/1/5/"
+				)
+					.then(function (response) {
+						console.log(response.data);
+            var xmlText, xmlParser, xmlDoc;
+            xmlText = response.data
+            xmlParser = new DOMParser();
+            xmlDoc = xmlParser.parseFromString(xmlText, "text/xml");
+            console.log(xmlDoc);
+            document.getElementById("w_temp").innerHTML =
+                xmlDoc.getElementsByTagName("W_TEMP")[4].childNodes[0].nodeValue + "도";
+                if(xmlDoc.getElementsByTagName("W_TEMP")[4].childNodes[0].nodeValue<18)
+                	{document.getElementById("text").innerText ="자살상담은 1588-9191";
+                	document.getElementById("text").style=" background:red;"}
+                else{document.getElementById("text").innerText ="날씨가 참 좋아요!";}
+                
+					}); }
+
 	</script>
 
 </body>
