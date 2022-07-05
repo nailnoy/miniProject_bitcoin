@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>코인 트랙커</title>
 	<link rel="stylesheet" type="text/css" href="./css/App.css">
 	<link rel="stylesheet" type="text/css" href="./css/index.css">
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -21,7 +21,7 @@
 				<li><a href="#">마이 프로필</a></li>
 				<li><a id="loginlink" href="login.html" style="display: block;">로그인</a></li>
 				<li><a id="logoutlink" href="cointracker?command=logout" style="display: none;">로그아웃</a></li>
-				<li><a href="signup.html">회원가입</a></li>
+				<li><a id="signuplink" href="signup.html" style="display: block;">회원가입</a></li>
 				<li><a href="naverlogin.html">네이버로그인</a></li>
 				<li><a id="text" >오늘의 날씨는</a></li>
 				<li><a style="background: #079745;" onclick="parseText()"> (click!) 오늘의 한강 수온 확인하기 :</a></li>
@@ -73,6 +73,7 @@
 			document.getElementById("loginlink").style.cssText = "display:none"
 			document.getElementById("logoutlink").style.cssText = "display:block"
 			document.getElementById("welcome").innerHTML=`${getCookie("userId")}님 안녕하세요!`
+			document.getElementById("signuplink").style.cssText = "display:none"
 		}else{
 			document.getElementById("loginlink").style.cssText = "display:block"
 			document.getElementById("logoutlink").style.cssText = "display:none"
