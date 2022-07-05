@@ -15,20 +15,20 @@
 
 		<header>
 			<h1 id="welcome"></h1>
-			<nav>	
-			  <ul>
-			  <li><a id = "afternlog" style= "visibility:hidden;" href="#"></a></li>
-				<li><a href="#">마이 프로필</a></li>
-				<li><a id="loginlink" href="login.html" style="display: block;">로그인</a></li>
-				<li><a id="logoutlink" href="cointracker?command=logout" style="display: none;">로그아웃</a></li>
-				<li><a id="signuplink" href="signup.html" style="display: block;">회원가입</a></li>
-				<li><a href="naverlogin.html">네이버로그인</a></li>
-				<li><a id="text" >오늘의 날씨는</a></li>
-				<li><a style="background: #079745;" onclick="parseText()"> (click!) 오늘의 한강 수온 확인하기 :</a></li>
-				<li><a id="w_temp" style=" background: #6e9abc; border: solid black;">수온</a></li>
-			  </ul>
+			<nav>
+				<ul>
+					<li><a id="afternlog" style="visibility:hidden;" href="#"></a></li>
+					<li><a href="profile.jsp">마이 프로필</a></li>
+					<li><a id="loginlink" href="login.html" style="display: block;">로그인</a></li>
+					<li><a id="logoutlink" href="cointracker?command=logout" style="display: none;">로그아웃</a></li>
+					<li><a id="signuplink" href="signup.html" style="display: block;">회원가입</a></li>
+					<li><a href="naverlogin.html">네이버로그인</a></li>
+					<li><a id="text">오늘의 날씨는</a></li>
+					<li><a style="background: #079745;" onclick="parseText()"> (click!) 오늘의 한강 수온 확인하기 :</a></li>
+					<li><a id="w_temp" style=" background: #6e9abc; border: solid black;">수온</a></li>
+				</ul>
 			</nav>
-		  </header>
+		</header>
 
 		<section class="coin-tracker">
 			<div class="title flex-grid flex-grid--center">
@@ -67,14 +67,14 @@
 		updateTable();
 
 		let interval = setInterval(updateTable, 60000);
-		
 
-		if(getCookie("userId") != null){
+
+		if (getCookie("userId") != null) {
 			document.getElementById("loginlink").style.cssText = "display:none"
 			document.getElementById("logoutlink").style.cssText = "display:block"
-			document.getElementById("welcome").innerHTML=`${getCookie("userId")}님 안녕하세요!`
+			document.getElementById("welcome").innerHTML = `${getCookie("userId")}님 안녕하세요!`
 			document.getElementById("signuplink").style.cssText = "display:none"
-		}else{
+		} else {
 			document.getElementById("loginlink").style.cssText = "display:block"
 			document.getElementById("logoutlink").style.cssText = "display:none"
 		}
@@ -97,11 +97,11 @@
 			return result;
 		}
 
-		
+
 		function updateTable() {
 			datas = null;
 			document.getElementById("table").innerHTML = '';
-			
+
 			axios.get(
 				"https://api.coingecko.com/api/v3/coins/markets?vs_currency=krw&order=market_cap_desc&per_page=100&page=1&sparkline=false?_=" + new Date().getTime()
 			)
@@ -155,35 +155,39 @@
 					console.log(response.data);
 				});
 		}
-		
+
 		function parseText() {
 			axios.get(
-					"http://openapi.seoul.go.kr:8088/666d64506c7965613130354f736d664c/xml/WPOSInformationTime/1/5/"
-				)
-					.then(function (response) {
-						console.log(response.data);
-            var xmlText, xmlParser, xmlDoc;
-            xmlText = response.data
-            xmlParser = new DOMParser();
-            xmlDoc = xmlParser.parseFromString(xmlText, "text/xml");
-            console.log(xmlDoc);
-            document.getElementById("w_temp").innerHTML =
-                xmlDoc.getElementsByTagName("W_TEMP")[4].childNodes[0].nodeValue + "도";
-                if(xmlDoc.getElementsByTagName("W_TEMP")[4].childNodes[0].nodeValue<18)
-                	{document.getElementById("text").innerText ="자살상담은 1588-9191";
-                	document.getElementById("text").style=" background:red;"}
-                else{document.getElementById("text").innerText ="날씨가 참 좋아요!";
-                document.getElementById("text").style=" background:yellow; color:black;"
-                	document.getElementById("w_temp").style=" background:orange; color:black; border: solid black;"}
-                
-					}); }
-		
-		if(sessionStorage.getItem("sessionNickname")!=null){
+				"http://openapi.seoul.go.kr:8088/666d64506c7965613130354f736d664c/xml/WPOSInformationTime/1/5/"
+			)
+				.then(function (response) {
+					console.log(response.data);
+					var xmlText, xmlParser, xmlDoc;
+					xmlText = response.data
+					xmlParser = new DOMParser();
+					xmlDoc = xmlParser.parseFromString(xmlText, "text/xml");
+					console.log(xmlDoc);
+					document.getElementById("w_temp").innerHTML =
+						xmlDoc.getElementsByTagName("W_TEMP")[4].childNodes[0].nodeValue + "도";
+					if (xmlDoc.getElementsByTagName("W_TEMP")[4].childNodes[0].nodeValue < 18) {
+						document.getElementById("text").innerText = "자살상담은 1588-9191";
+						document.getElementById("text").style = " background:red;"
+					}
+					else {
+						document.getElementById("text").innerText = "날씨가 참 좋아요!";
+						document.getElementById("text").style = " background:yellow; color:black;"
+						document.getElementById("w_temp").style = " background:orange; color:black; border: solid black;"
+					}
+
+				});
+		}
+
+		if (sessionStorage.getItem("sessionNickname") != null) {
 			var n = sessionStorage.getItem("sessionNickname");
 			console.log(n);
-			document.getElementById("afternlog").innerHTML = `${n}`+"님";
-			document.getElementById("afternlog").style.visibility="visible";
-            
+			document.getElementById("afternlog").innerHTML = `${n}` + "님";
+			document.getElementById("afternlog").style.visibility = "visible";
+
 		}
 
 	</script>

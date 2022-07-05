@@ -46,37 +46,36 @@ public class BitcoinController extends HttpServlet {
 
 	protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 			
-			response.setContentType("text/html;charset=utf-8");
-			
 			String id = request.getParameter("id");
 			String psw = request.getParameter("psw");
+			
 			
 			MemberDTO member = MemberDAO.getInstance().getMember(id);
 				
 			if (id.equals(member.getId()) && psw.equals(member.getPassword())) {
+				url = "index.html";
 				Cookie cookie = new Cookie("userId", id);
 			    cookie.setMaxAge(60*60*24); 
 			    cookie.setPath("/"); 
 			    response.addCookie(cookie);
-				response.sendRedirect("index.html");
+				response.sendRedirect(url);
 			}else {
-				response.sendRedirect("fail-login");
+				response.sendRedirect(url);
 				}
 		}
 	
 	protected void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		System.out.println("1");
+		url = "index.html";
 		Cookie cookie = new Cookie("userId", null); // 삭제할 쿠키에 대한 값을 null로 지정
 	    cookie.setMaxAge(0); // 유효시간을 0으로 설정해서 바로 만료시킨다.
 	    cookie.setPath("/"); 
 	    response.addCookie(cookie); // 응답에 추가해서 없어지도록 함
-	    response.sendRedirect("index.html");
+	    response.sendRedirect(url);
 	}
 	
 	protected void signup(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=utf-8");
-
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String psw = request.getParameter("psw");
@@ -84,12 +83,13 @@ public class BitcoinController extends HttpServlet {
 		System.out.println(request.getParameter("email"));
 		MemberDTO newmember = MemberDTO.builder().id(id).name(name).password(psw).build();
 		try {
+			url = "index.html";
 			MemberDAO.getInstance().addMember(newmember);
-			response.sendRedirect("index.html");
+			response.sendRedirect(url);
 		} catch (RollbackException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", "중복된 e-mail 입니다.");
-			request.getRequestDispatcher("showError.jsp").forward(request, response);
+			request.getRequestDispatcher(url).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 
